@@ -1,0 +1,13 @@
+{
+  "platformName": "Android",
+  "deviceName": "AndroidTestDevice",
+  "platformVersion": "8.0",
+  "appPackage": "org.wikipedia",
+  "appActivity": ".main.MainActivity"
+}
+
+More options
+text Add to reading list
+id org.wikipedia:id/onboarding_button
+org.wikipedia:id/text_input
+
