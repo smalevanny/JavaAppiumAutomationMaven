@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.factories.ArticlePageObjectFactory;
@@ -7,8 +9,10 @@ import lib.factories.MyListsObjectFactory;
 import lib.factories.NavigationUIFactory;
 import lib.factories.SearchPageObjectFactory;
 import lib.ui.*;
+import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Tests for My Lists")
 public class MyListsTests extends CoreTestCase {
 
     public static final String
@@ -17,6 +21,10 @@ public class MyListsTests extends CoreTestCase {
             PASSWORD    = "Wiki1930";
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "My Lists")})
+    @DisplayName("Add article to My Lists and then remove it")
+    @Description("Search a specific article, add it to My List, remove the article")
+    @Step("Start test testSaveFirstArticleToMyListAndDeleteIt")
     public void testSaveFirstArticleToMyListAndDeleteIt(){
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
@@ -40,7 +48,7 @@ public class MyListsTests extends CoreTestCase {
 
             articlePageObject.waitForTitleElement();
 
-            assertEquals("We are not on the same page after login", article_title, articlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login", article_title, articlePageObject.getArticleTitle());
             articlePageObject.addArticleToMySaved();
         }
         articlePageObject.closeArticle();
@@ -57,6 +65,10 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "My Lists")})
+    @DisplayName("Add 2 articles to My Lists and then remove one of them")
+    @Description("Search a specific article, add it to My List, search the second article, add it to My List, open My List, remove the second article, check the first article is still present")
+    @Step("Start test testSaveTwoArticlesToMyListAndDeleteSecondOne")
     public void testSaveTwoArticlesToMyListAndDeleteSecondOne(){
         String search_input_for_first_article   = "Java";
         String search_input_for_second_article  = "Python";
@@ -89,7 +101,7 @@ public class MyListsTests extends CoreTestCase {
 
             articlePageObject.waitForTitleElement();
 
-            assertEquals("We are not on the same page after login", title_for_the_first_article, articlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login", title_for_the_first_article, articlePageObject.getArticleTitle());
             articlePageObject.addArticleToMySaved();
         }
         articlePageObject.closeArticle();
@@ -118,7 +130,7 @@ public class MyListsTests extends CoreTestCase {
 
             articlePageObject.waitForTitleElement();
 
-            assertEquals("We are not on the same page after login", title_for_the_first_article, articlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login", title_for_the_first_article, articlePageObject.getArticleTitle());
             articlePageObject.addArticleToMySaved();
         }
 
@@ -140,7 +152,7 @@ public class MyListsTests extends CoreTestCase {
         myListsPageObject.clickArticleByTitle(title_for_the_first_article);
         articlePageObject.waitForTitleElement();
         String article_title = articlePageObject.getArticleTitle();
-        assertEquals(
+        Assert.assertEquals(
                 "We see unexpected text",
                 title_for_the_first_article,
                 article_title);

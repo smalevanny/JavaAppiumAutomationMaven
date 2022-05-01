@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;;
 
@@ -29,6 +30,7 @@ abstract public class MyListsPageObject extends MainPageObject{
     }
     /* Template methods */
 
+    @Step("Open '{folder_name}' folder")
     public void openFolderByName(String folder_name){
         this.waitForElementAndClick(
                 getFolderXpathByName(folder_name),
@@ -36,6 +38,7 @@ abstract public class MyListsPageObject extends MainPageObject{
                 5);
     }
 
+    @Step("Delete article with '{article_title}' title")
     public void swipeArticleToDelete(String article_title){
         this.waitFotArticleToAppearByTitle(article_title);
 
@@ -59,6 +62,7 @@ abstract public class MyListsPageObject extends MainPageObject{
         this.waitFotArticleToDisappearByTitle(article_title);
     }
 
+    @Step("Wait for article with '{article_title}' title to appear")
     public void waitFotArticleToAppearByTitle(String article_title){
         this.waitForElementPresent(
                 getdArticleXpathByTitle(article_title),
@@ -66,12 +70,15 @@ abstract public class MyListsPageObject extends MainPageObject{
                 5);
     }
 
+    @Step("Wait for article with '{article_title}' title to disappear")
     public void waitFotArticleToDisappearByTitle(String article_title){
         this.waitForElementNotPresent(
                 getdArticleXpathByTitle(article_title),
                 "Saved article still present with title " + article_title,
                 15);
     }
+
+    @Step("Click by the article with '{article_title}' title")
     public void clickArticleByTitle(String article_title){
         this.waitForElementAndClick(
                 getdArticleXpathByTitle(article_title),
